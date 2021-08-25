@@ -39,8 +39,27 @@ def delete_note():
 @views.route('/lyrics')
 def lyrics_page():
     lyrics = Lyrics.query.all()
-    return render_template('lyrics.html', user=current_user, lyrics=lyrics)
+    def make_link(title):
+        return title.replace(' ', '-')
+    def make_title(linkedTitle):
+        return linkedTitle.replace('-', ' ')
+    return render_template('lyrics.html', user=current_user, lyrics=lyrics, makelink=make_link, maketitle=make_title)
 
-@views.route('/writelyrics')
+@views.route('/writelyrics', methods=["POST", "GET"])
 def writelyrics_page():
+    if request.method == "POST":
+        title = request.form.get('title')
+        type = request.form.get('type')
+        reciter = request.form.get('reciter')
+        topic = request.form.get('topic')
+        link = request.form.get('link')
+        tempo = request.form.get('tempo')
+        content = request.form.get('content')
+
+        if not title == None and not type == None and not topic == None and not tempo == None and not content == None:
+            new_lyric = Lyrics(title=title, content=content, typ=type, reciter=reciter, user_id=current_user.id, topic=topic, link=link, tempo=tempo)
+            db.session.add(new_lyric)
+            db.session.commit()
+            flash("Lyric Added!", category='success')
+
     return render_template('writelyrics.html', user=current_user)

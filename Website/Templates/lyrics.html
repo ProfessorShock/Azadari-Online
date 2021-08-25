@@ -5,7 +5,6 @@
     <thead>
         <tr>
             <!-- Your Columns HERE -->
-            <th scope="col">ID</th>
             <th scope="col">Title</th>
             <th scope="col">Type</th>
             <th scope="col">Reciter</th>
@@ -17,12 +16,11 @@
         <!-- Your rows inside the table HERE: -->
         {% for lyric in lyrics %}
         <tr>
-          <td>{{ lyric.id }}</td>
-          <td>{{ lyric.title }}</td>
+          <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
           <td>{{ lyric.typ }}</td>
           <td>{{ lyric.reciter }}</td>
           <td>{{ lyric.topic }}</td>
-          <td><Link>{{ lyric.link }}</Link></td>
+          <td><a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener">{{ lyric.link }}</a></td>
         </tr>
         {% endfor %}
     </tbody>
