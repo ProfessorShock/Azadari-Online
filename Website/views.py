@@ -2,7 +2,7 @@ from Website.models import Note
 from Website.auth import login
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import Note, db
+from .models import Lyrics, Note, db
 import json
 
 views = Blueprint("views", __name__)
@@ -38,8 +38,9 @@ def delete_note():
 
 @views.route('/lyrics')
 def lyrics_page():
-    return render_template('lyrics.html')
+    lyrics = Lyrics.query.all()
+    return render_template('lyrics.html', user=current_user, lyrics=lyrics)
 
 @views.route('/writelyrics')
 def writelyrics_page():
-    return render_template('writelyrics.html')
+    return render_template('writelyrics.html', user=current_user)

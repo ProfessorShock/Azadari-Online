@@ -1,2 +1,30 @@
 {% extends 'base.html' %}
 {% block title %}Lyrics{% endblock %}
+{% block content %}
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Reciter</th>
+            <th scope="col">Topic</th>
+            <th scope='col'>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Your rows inside the table HERE: -->
+        {% for lyric in lyrics %}
+        <tr>
+          <td>{{ lyric.id }}</td>
+          <td>{{ lyric.title }}</td>
+          <td>{{ lyric.typ }}</td>
+          <td>{{ lyric.reciter }}</td>
+          <td>{{ lyric.topic }}</td>
+          <td><Link>{{ lyric.link }}</Link></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
