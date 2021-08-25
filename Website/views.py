@@ -35,3 +35,11 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/lyrics')
+def lyrics_page():
+    return render_template('lyrics.html')
+
+@views.route('/writelyrics')
+def writelyrics_page():
+    return render_template('writelyrics.html')
