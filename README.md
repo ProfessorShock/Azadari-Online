@@ -1,4 +1,5 @@
 # Flask Notes Website
+
 # The pycache contains the modules for the project
 # The Website file contains all of the frontend and backend for the website
 # The main.py file contains the part of the code that references the rest and actually runs
