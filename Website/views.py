@@ -40,7 +40,7 @@ def delete_note():
 def lyrics_page():
     lyrics = Lyrics.query.all()
     def make_link(title):
-        return title.replace(' ', '-')
+        return f"lyrics/{title.replace(' ', '-')}"
     def make_title(linkedTitle):
         return linkedTitle.replace('-', ' ')
     return render_template('lyrics.html', user=current_user, lyrics=lyrics, makelink=make_link, maketitle=make_title)
@@ -63,3 +63,11 @@ def writelyrics_page():
             flash("Lyric Added!", category='success')
 
     return render_template('writelyrics.html', user=current_user)
+
+@views.route("/lyrics/<lyrics_name>")
+def lyricsdisplay_page(lyrics_name):
+    def make_title(linkedTitle):
+        return linkedTitle.replace('-', ' ')
+    title = make_title(lyrics_name)
+    content = Lyrics.query.filter_by(title=title).first()
+    return render_template('lyricscontent.html', user=current_user, content=content, title=title)
