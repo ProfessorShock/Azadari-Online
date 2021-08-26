@@ -85,6 +85,10 @@ def delete_lyric(lyric_title):
     db.session.commit()
     return redirect('/lyrics')
 
+@views.route('/checkid')
+def checkid_page():
+    return render_template('checkid.html', user=current_user)
+
 """
 @views.route('/search-lyrics')
 def search_lyrics():

@@ -13,6 +13,7 @@
     <thead>
       <tr>
         <!-- Your Columns HERE -->
+        <th scope='col'>Id Of Writer</th>
         <th scope="col">Title</th>
         <th scope="col">Type</th>
         <th scope="col">Topic</th>
@@ -20,13 +21,16 @@
         <th scope="col">Reciter</th>
         <th scope="col">Topic</th>
         <th scope="col">Link</th>
+        {% if user.id == 1 %}
         <th scope="col">Delete</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
       <!-- Your rows inside the table HERE: -->
       {% for lyric in lyrics %}
       <tr>
+        <td>{{ lyric.user_id }}</td>
         <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
         <td>{{ lyric.typ }}</td>
         <td>{{ lyric.topic }}</td>
@@ -37,8 +41,10 @@
           <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener"
             >{{ lyric.link }}</a
           >
+        {% if user.id == 1 %}
         </td>
         <td><a href="/delete-lyric/{{ makeobjlink(lyric.title) }}">Delete {{ lyric.typ }}</a></td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>
