@@ -3,7 +3,7 @@ from Website.models import Note
 from Website.auth import login
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import Lyrics, Note, db
+from .models import Lyrics, Note, User, db
 import json
 
 views = Blueprint("views", __name__)
@@ -87,16 +87,14 @@ def delete_lyric(lyric_title):
 
 @views.route('/checkid')
 def checkid_page():
-    return render_template('checkid.html', user=current_user)
+    users = User.query.all()
+    return render_template('checkid.html', user=current_user, users=users)
 
-"""
 @views.route('/search-lyrics')
 def search_lyrics():
-    if request.method == "POST":
-        column = request.form.get('column')
-        column_content = request.form.get('column-content')
-        entries = Lyrics.query.filter_by(topic='General')
+    if request.method == "GET":
+        column = request.form.get('searchcol')
+        column_content = request.form.get('searchcol-content')
+        entries = Lyrics.query.filter_by(column=column_content)
     
     return render_template('searchlyrics.html', user=current_user, entries=entries)
-
-"""

@@ -1,19 +1,18 @@
 {% extends 'base.html' %} 
 {% block title %}Lyrics{% endblock %} 
 {% block content %}
-<!--<div id="search-bar">
-  <form method="GET">
-    <textarea name="column" id="column" cols="30" rows="10">Column</textarea>
-    <textarea name="column-content" id="column-content" cols="30" rows="10">Column Content</textarea>
-    <button class='btn btn-primary' href='/search-lyrics'>Search</button>
-  </form>
-</div>-->
+<div id="search-bar">
+  <form method="GET">   
+    <input type="text" placeholder="Search The Column You Want To Specify" name="searchcol">
+    <input type="text" placeholder="Search the Content Of The Column" name="searchcol-content">   
+    <button class="btn btn-primary" type="submit">Search</button>   
+  </form> 
+</div>
 <div id="all-lyrics">
   <table class="table table-hover table-dark">
     <thead>
       <tr>
         <!-- Your Columns HERE -->
-        <th scope='col'>Id Of Writer</th>
         <th scope="col">Title</th>
         <th scope="col">Type</th>
         <th scope="col">Topic</th>
@@ -22,6 +21,7 @@
         <th scope="col">Topic</th>
         <th scope="col">Link</th>
         {% if user.id == 1 %}
+        <th scope='col'>Id Of Writer</th>
         <th scope="col">Delete</th>
         {% endif %}
       </tr>
@@ -30,7 +30,6 @@
       <!-- Your rows inside the table HERE: -->
       {% for lyric in lyrics %}
       <tr>
-        <td>{{ lyric.user_id }}</td>
         <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
         <td>{{ lyric.typ }}</td>
         <td>{{ lyric.topic }}</td>
@@ -38,10 +37,15 @@
         <td>{{ lyric.reciter }}</td>
         <td>{{ lyric.topic }}</td>
         <td>
-          <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener"
-            >{{ lyric.link }}</a
-          >
+          <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener">
+            {% if 'youtube' in lyric.link.lower() %}
+            YouTube Link
+            {% else %}
+            {{ lyric.link }}
+            {% endif %}
+          </a>
         {% if user.id == 1 %}
+        <td>{{ lyric.user_id }}</td>
         </td>
         <td><a href="/delete-lyric/{{ makeobjlink(lyric.title) }}">Delete {{ lyric.typ }}</a></td>
         {% endif %}

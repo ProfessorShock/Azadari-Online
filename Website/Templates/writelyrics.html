@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Write New Lyrics{% endblock %}
 {% block content %}
-<h1>Submit Lyrics For A Noha, Salam, Marsiya, or Manqabat</h1>
-<form method="POST">
-    <textarea name="title" id="title" class='form-control'>Title</textarea>
-    <br>
-    <textarea name="type" id="type" class='form-control'>Type</textarea>
-    <br>
-    <textarea name="reciter" id="reciter" class='form-control'>Reciter</textarea>
-    <br>
-    <textarea name="topic" id="topic" class='form-control'>Topic</textarea>
-    <br>
-    <textarea name="link" id="link" class='form-control'>Link</textarea>
-    <br>
-    <textarea name="tempo" id="tempo" class='form-control'>Tempo</textarea>
-    <br>
-    <textarea name="content" id="content" cols="30" rows="25" class="form-control">Content</textarea>
-    <br />
-    <div align="center">
-      <button type="submit" class="btn btn-primary">Add Lyrics</button>
+<div class="container">
+  <br>
+  <h1>Submit Lyrics For A Noha, Salam, Marsiya, or Manqabat</h1>
+  <br>
+  <form method="POST">
+      <textarea name="title" id="title" class='form-control'>Title</textarea>
       <br>
-    </div>
+      <textarea name="type" id="type" class='form-control'>Type</textarea>
+      <br>
+      <textarea name="reciter" id="reciter" class='form-control'>Reciter</textarea>
+      <br>
+      <textarea name="topic" id="topic" class='form-control'>Topic</textarea>
+      <br>
+      <textarea name="link" id="link" class='form-control'>Link</textarea>
+      <br>
+      <textarea name="tempo" id="tempo" class='form-control'>Tempo</textarea>
+      <br>
+      <textarea name="content" id="content" cols="30" rows="25" class="form-control">Content</textarea>
+      <br />
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Add Lyrics</button>
+        <br>
+      </div>
   </form>
+</div>
 {% endblock %}

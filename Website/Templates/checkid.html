@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Admin Page{% endblock %}
 {% block content %}
-{% if user.id == 1 %}
-<p>{{ user }}</p>
-{% endif %}
+<div class='container'>
+    {% if user.id == 1 %}
+    <p>{{ user }}</p>
+    <h1>All users</h1>
+    <p>{{ users }}</p>
+    {% endif %}
+</div>
 {% endblock %}
