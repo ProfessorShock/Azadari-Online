@@ -42,9 +42,11 @@ def lyrics_page():
     lyrics = Lyrics.query.all()
     def make_link(title):
         return f"lyrics/{title.replace(' ', '-')}"
+    def make_objlink(title):
+        return title.replace(' ', '-')
     def make_title(linkedTitle):
         return linkedTitle.replace('-', ' ')
-    return render_template('lyrics.html', user=current_user, lyrics=lyrics, makelink=make_link, maketitle=make_title)
+    return render_template('lyrics.html', user=current_user, lyrics=lyrics, makelink=make_link, maketitle=make_title, makeobjlink=make_objlink)
 
 @views.route('/writelyrics', methods=["POST", "GET"])
 def writelyrics_page():
@@ -75,7 +77,22 @@ def lyricsdisplay_page(lyrics_name):
 
 @views.route('/delete-lyric/<lyric_title>')
 def delete_lyric(lyric_title):
+    def make_title(linkedTitle):
+        return linkedTitle.replace('-', ' ')
+    lyric_title = make_title(lyric_title)
     lyric = Lyrics.query.filter_by(title=lyric_title).first()
     db.session.delete(lyric)
     db.session.commit()
     return redirect('/lyrics')
+
+"""
+@views.route('/search-lyrics')
+def search_lyrics():
+    if request.method == "POST":
+        column = request.form.get('column')
+        column_content = request.form.get('column-content')
+        entries = Lyrics.query.filter_by(topic='General')
+    
+    return render_template('searchlyrics.html', user=current_user, entries=entries)
+
+"""

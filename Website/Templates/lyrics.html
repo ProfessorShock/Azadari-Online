@@ -1,6 +1,13 @@
 {% extends 'base.html' %} 
 {% block title %}Lyrics{% endblock %} 
 {% block content %}
+<!--<div id="search-bar">
+  <form method="GET">
+    <textarea name="column" id="column" cols="30" rows="10">Column</textarea>
+    <textarea name="column-content" id="column-content" cols="30" rows="10">Column Content</textarea>
+    <button class='btn btn-primary' href='/search-lyrics'>Search</button>
+  </form>
+</div>-->
 <div id="all-lyrics">
   <table class="table table-hover table-dark">
     <thead>
@@ -31,7 +38,7 @@
             >{{ lyric.link }}</a
           >
         </td>
-        <td><a href="/delete-lyric/{{ lyric.title }}">Delete {{ lyric.typ }}</a></td>
+        <td><a href="/delete-lyric/{{ makeobjlink(lyric.title) }}">Delete {{ lyric.typ }}</a></td>
       </tr>
       {% endfor %}
     </tbody>
