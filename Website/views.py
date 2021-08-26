@@ -1,3 +1,4 @@
+from werkzeug.utils import redirect
 from Website.models import Note
 from Website.auth import login
 from flask import Blueprint, render_template, request, flash, jsonify
@@ -71,3 +72,10 @@ def lyricsdisplay_page(lyrics_name):
     title = make_title(lyrics_name)
     content = Lyrics.query.filter_by(title=title).first()
     return render_template('lyricscontent.html', user=current_user, content=content, title=title)
+
+@views.route('/delete-lyric/<lyric_title>')
+def delete_lyric(lyric_title):
+    lyric = Lyrics.query.filter_by(title=lyric_title).first()
+    db.session.delete(lyric)
+    db.session.commit()
+    return redirect('/lyrics')

@@ -1,32 +1,44 @@
-{% extends 'base.html' %}
-{% block title %}Lyrics{% endblock %}
+{% extends 'base.html' %} 
+{% block title %}Lyrics{% endblock %} 
 {% block content %}
-<table class="table table-hover table-dark">
+<div id="all-lyrics">
+  <table class="table table-hover table-dark">
     <thead>
-        <tr>
-            <!-- Your Columns HERE -->
-            <th scope="col">Title</th>
-            <th scope="col">Type</th>
-            <th scope='col'>Topic</th>
-            <th scope='col'>Tempo</th>
-            <th scope="col">Reciter</th>
-            <th scope="col">Topic</th>
-            <th scope='col'>Link</th>
-        </tr>
+      <tr>
+        <!-- Your Columns HERE -->
+        <th scope="col">Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Tempo</th>
+        <th scope="col">Reciter</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Link</th>
+        <th scope="col">Delete</th>
+      </tr>
     </thead>
     <tbody>
-        <!-- Your rows inside the table HERE: -->
-        {% for lyric in lyrics %}
-        <tr>
-          <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
-          <td>{{ lyric.typ }}</td>
-          <td>{{ lyric.topic }}</td>
-          <td>{{ lyric.tempo }}</td>
-          <td>{{ lyric.reciter }}</td>
-          <td>{{ lyric.topic }}</td>
-          <td><a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener">{{ lyric.link }}</a></td>
-        </tr>
-        {% endfor %}
+      <!-- Your rows inside the table HERE: -->
+      {% for lyric in lyrics %}
+      <tr>
+        <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
+        <td>{{ lyric.typ }}</td>
+        <td>{{ lyric.topic }}</td>
+        <td>{{ lyric.tempo }}</td>
+        <td>{{ lyric.reciter }}</td>
+        <td>{{ lyric.topic }}</td>
+        <td>
+          <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener"
+            >{{ lyric.link }}</a
+          >
+        </td>
+        <td><a href="/delete-lyric/{{ lyric.title }}">Delete {{ lyric.typ }}</a></td>
+      </tr>
+      {% endfor %}
     </tbody>
   </table>
+</div>
 {% endblock %}
+
+<button align="left" type="button" class="close">
+  Test
+</button>
