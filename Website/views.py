@@ -46,7 +46,30 @@ def lyrics_page():
         return title.replace(' ', '-')
     def make_title(linkedTitle):
         return linkedTitle.replace('-', ' ')
+
+    if request.method == "GET":
+        global searchcontent
+        searchcontent = str(request.form.get('search'))
+    
     return render_template('lyrics.html', user=current_user, lyrics=lyrics, makelink=make_link, maketitle=make_title, makeobjlink=make_objlink)
+
+@views.route('/search-lyrics')
+def searchlyrics_page():
+    lyrics = Lyrics.query.all()
+    entries = []
+    for lyric in lyrics:
+        if searchcontent in lyric.title:
+            entries.push(lyric)
+        if searchcontent in lyric.typ:
+            entries.push(lyric)
+        if searchcontent in lyric.reciter:
+            entries.push(lyric)
+        if searchcontent in lyric.topic:
+            entries.push(lyric)
+        if searchcontent in lyric.tempo:
+            entries.push(lyric)
+
+    return render_template('searchlyrics.html', user=current_user, entries=entries)
 
 @views.route('/writelyrics', methods=["POST", "GET"])
 def writelyrics_page():
@@ -89,12 +112,3 @@ def delete_lyric(lyric_title):
 def checkid_page():
     users = User.query.all()
     return render_template('checkid.html', user=current_user, users=users)
-
-@views.route('/search-lyrics')
-def search_lyrics():
-    if request.method == "GET":
-        column = request.form.get('searchcol')
-        column_content = request.form.get('searchcol-content')
-        entries = Lyrics.query.filter_by(column=column_content)
-    
-    return render_template('searchlyrics.html', user=current_user, entries=entries)

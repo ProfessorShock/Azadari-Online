@@ -1,6 +1,6 @@
 Search Bar Points of Contact
 Frontend:
-searchlyrics.html
-lyrics.html
+3. searchlyrics.html
+1. lyrics.html
 Backend:
-views.py
+2. views.py

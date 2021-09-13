@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}Possible Lyrics{% endblock %}
+{% block title %}Lyrics{% endblock %}
 {% block content %}
-<div id="possible--lyrics">
+<div id="searched-lyrics">
     <table class="table table-hover table-dark">
       <thead>
         <tr>
@@ -13,13 +13,15 @@
           <th scope="col">Reciter</th>
           <th scope="col">Topic</th>
           <th scope="col">Link</th>
+          {% if user.id == 1 %}
+          <th scope='col'>Id Of Writer</th>
           <th scope="col">Delete</th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
         <!-- Your rows inside the table HERE: -->
-        {% for lyric in lyrics %}
-        {% if lyric in entries %}
+        {% for entry in entries %}
         <tr>
           <td><a href="{{ makelink(lyric.title) }}">{{ lyric.title }}</a></td>
           <td>{{ lyric.typ }}</td>
@@ -28,29 +30,19 @@
           <td>{{ lyric.reciter }}</td>
           <td>{{ lyric.topic }}</td>
           <td>
-            <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener"
-              >{{ lyric.link }}</a
-            >
+            <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener">
+              {% if 'youtube' in lyric.link.lower() %}
+              YouTube Link
+              {% endif %}
+            </a>
+          {% if user.id == 1 %}
+          <td>{{ lyric.user_id }}</td>
           </td>
           <td><a href="/delete-lyric/{{ makeobjlink(lyric.title) }}">Delete {{ lyric.typ }}</a></td>
+          {% endif %}
         </tr>
-        {% endif %}
         {% endfor %}
       </tbody>
     </table>
   </div>
 {% endblock %}
-
-lyrics = [
-  {},
-  {},
-  {}
-]
-
-entries = [<Test>, ]
-
-for lyric in lyrics
-if lyric in entries
-stuff
-endfor
-endif

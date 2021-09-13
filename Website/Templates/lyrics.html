@@ -1,13 +1,16 @@
 {% extends 'base.html' %} 
 {% block title %}Lyrics{% endblock %} 
 {% block content %}
-<div id="search-bar">
-  <form method="GET">   
-    <input type="text" placeholder="Search The Column You Want To Specify" name="searchcol">
-    <input type="text" placeholder="Search the Content Of The Column" name="searchcol-content">   
-    <button class="btn btn-primary" type="submit">Search</button>   
-  </form> 
+<br>
+<div id="searchbar">
+  <form method="GET">
+    <input type="search" id="search" placeholder="Search Lyrics" name="search" style="size: 100em;"/>
+    <button type="submit" class="btn btn-primary" id="searchbutton">
+      <a href="/search-lyrics" id="searchhref" style="color: white">Search</a>
+    </button>
+  </form>
 </div>
+<br>
 <div id="all-lyrics">
   <table class="table table-hover table-dark">
     <thead>
@@ -40,8 +43,6 @@
           <a href="{{ lyric.link }}" target="_blank" rel="noreferrer noopener">
             {% if 'youtube' in lyric.link.lower() %}
             YouTube Link
-            {% else %}
-            {{ lyric.link }}
             {% endif %}
           </a>
         {% if user.id == 1 %}
@@ -55,7 +56,3 @@
   </table>
 </div>
 {% endblock %}
-
-<button align="left" type="button" class="close">
-  Test
-</button>
